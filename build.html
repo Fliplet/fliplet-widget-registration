@@ -1,0 +1,43 @@
+<div data-email-verification-id="{{id}}" class="content-wrapper fl-email-validation">
+
+    <div class="state start" data-state="auth">
+        <h3 class="aligncenter">Registration</h3>
+        <p>To register we must verify that your email exists in our system</p>
+        <div class="form-group">
+            <input type="email" name="verify-email" class="form-control verify_email" placeholder="Enter your email">
+            <p class="email-error">Please enter a valid email.</p>
+        </div>
+        <button class="btn btn-primary verify-identity">Register</button>
+        <button class="btn btn-link have-code hidden">I already have a verification code</button>
+    </div>
+
+    <div class="state future" data-state="verify-code">
+        <h2>Verify your email address</h2>
+        <p>Enter the verification code that was sent to <span class="input-email"></span>.</p>
+        <div class="form-group input-wrapper">
+            <input type="text" class="verify_pin form-control" placeholder="Enter verification code">
+            <span class="fa fa-angle-left back"></span>
+            <p class="pin-error">You entered the wrong verification code or it might have expired.
+                <br>Try again or tap <i>Resend verification code</i>.</p>
+        </div>
+        <button class="btn btn-primary verify-code">Verify</button>
+        <button class="btn btn-link resend-code">Resend verification code</button>
+        <p class="pin-resent text-success">A new verification code was sent to your email.</p>
+    </div>
+
+    <div class="state future" data-state="confirmation">
+        <h1>Email verified</h1>
+        <p>You have been verified and you can now continue to the registration screen.</p>
+        <button class="btn btn-primary lock_continue">Continue</button>
+    </div>
+</div>
+<template id="email-template-holder">
+    <div>
+        <p>Your verification code is: <strong>\{{code}}</strong>
+            <br><span style="color:#999;font-size:0.9em;">
+    This verification code will be valid for the next \{{code_duration}} minutes</span></p>
+        <p>You or someone has requested to access the app: <strong>\{{app_name}}</strong>. To continue using the app, please enter your verification code into the app on your mobile device.</p>
+        <p>If you did not perform this request, you can ignore this email.</p>
+        <p>Generated at: \{{time}}</p>
+    </div>
+</template>

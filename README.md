@@ -1,1 +1,1 @@
-# fliplet-widget-registration
+# Registration widget
