@@ -227,15 +227,15 @@
 }
 
 .form-group .email-error,
-.form-group .pin-error {
+.state .pin-error {
 	display: none;
 	font-size: 0.9em;
 	color: #a94442;
 	margin: 10px 0;
 }
 
-.form-group.has-error .email-error,
-.form-group.has-error .pin-error {
+.form-group.has-error + .pin-error,
+.form-group.has-error .email-error {
 	display: block;
 }
 
@@ -256,6 +256,7 @@
 
 .state .have-code {
 	visibility: hidden;
+	margin-top: 10px;
 }
 
 .state.has-code .have-code {

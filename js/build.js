@@ -9,7 +9,8 @@ $('.fl-email-validation').each(function(){
       CODE_LENGTH = 6,
       APP_NAME = data.appName,
       APP_VALIDATION_DATA_DIRECTORY_ID = data.dataSource,
-      DATA_DIRECTORY_COLUMN = data.dataColumn,
+      DATA_DIRECTORY_COLUMN = data.emailColumn,
+      DATA_DIRECTORY_CHECK_COLUMN = data.otherColumn,
       CONTACT_UNREACHABLE = "We couldn't reach this contact. Try again or change your networking method.";
 
   function initEmailValidation() {
@@ -35,7 +36,7 @@ $('.fl-email-validation').each(function(){
   // VARS
   var havePinCode = true;
 
-  function readDataSource(data_source_id, where_object, success_callback, fail_callback) {
+  function readDataSource(data_source_id, where_object, check_column, success_callback, fail_callback) {
     //read_data_sources -> OK.
 
     Fliplet.DataSources.connect(data_source_id).then(function(dataSource){
@@ -44,11 +45,21 @@ $('.fl-email-validation').each(function(){
       });
     }).then(function(entries){
       if(entries.length) {
-        success_callback();
-        return;
+        entries.forEach(function(entry) {
+          if ( entry.data[check_column] == null ) {
+            success_callback();
+            return;
+          } else {
+            fail_callback(false);
+            return;
+          }
+        });
+      } else {
+        fail_callback(true);
       }
-      fail_callback();
-    }, fail_callback);
+    }, function() {
+      fail_callback(true);
+    });
   }
 
   function sendEmail(body, replyTo, subject, to, success_callback, fail_callback) {
@@ -151,7 +162,7 @@ $('.fl-email-validation').each(function(){
       // VALID EMAIL
       if (validateEmail(emailAddress)) {
         // CHECK FOR EMAIL ON DATA SOURCE
-        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', function () {
+        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, function () {
           userDataPV.email = emailAddress;
 
           // EMAIL FOUND ON DATA SOURCE
@@ -172,13 +183,23 @@ $('.fl-email-validation').each(function(){
             $email_validation.find('.email-error').text(CONTACT_UNREACHABLE).addClass("show");
           });
 
-        }, function () {
-          // EMAIL NOT FOUND ON DATA SOURCE
-          _this.html("Register");
-          _this.removeClass("disabled").prop('disabled', false);
-          $email_validation.find('.email-error').html("The email is not valid. Try again with another email.");
-          $email_validation.find('.state[data-state=auth] .form-group').addClass('has-error');
-          calculateElHeight($email_validation.find('.state[data-state=auth]'));
+        }, function ( error ) {
+          if ( error ) {
+            // EMAIL NOT FOUND ON DATA SOURCE
+            _this.html("Register");
+            _this.removeClass("disabled").prop('disabled', false);
+            $email_validation.find('.email-error').html("We couldn't find your email in our system. Try again or request an invite.");
+            $email_validation.find('.state[data-state=auth] .form-group').addClass('has-error');
+            calculateElHeight($email_validation.find('.state[data-state=auth]'));
+          } else {
+            // EMAIL FOUND ON DATA SOURCE BUT IS ALREADY REGISTERED
+            _this.html("Register");
+            _this.removeClass("disabled").prop('disabled', false);
+            $email_validation.find('.email-error').html("You are already registed. Try logging in.");
+            $email_validation.find('.state[data-state=auth] .form-group').addClass('has-error');
+            calculateElHeight($email_validation.find('.state[data-state=auth]'));
+          }
+
         });
 
       } else {
@@ -294,6 +315,11 @@ $('.fl-email-validation').each(function(){
     $email_validation.find('.lock_continue').on('click', function () {
       if(typeof data.action !== "undefined") {
         Fliplet.Navigate.to(data.action);
+      }
+    });
+    $email_validation.find('.btn-request-invite').on('click', function () {
+      if(typeof data.inviteAction !== "undefined") {
+        Fliplet.Navigate.to(data.inviteAction);
       }
     });
   }

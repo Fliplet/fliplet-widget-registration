@@ -32,6 +32,21 @@
     }
   });
 
+  var inviteActionProvider = Fliplet.Widget.open('com.fliplet.link', {
+    // If provided, the iframe will be appended here,
+    // otherwise will be displayed as a full-size iframe overlay
+    selector: '#request-invitation-link',
+    // Also send the data I have locally, so that
+    // the interface gets repopulated with the same stuff
+    data: data.inviteAction,
+    // Events fired from the provider
+    onEvent: function (event, data) {
+      if (event === 'interface-validate') {
+        Fliplet.Widget.toggleSaveButton(data.isValid === true);
+      }
+    }
+  });
+
   // 1. Fired from Fliplet Studio when the external save button is clicked
   Fliplet.Widget.onSaveRequest(function () {
     $('form').submit();
@@ -41,11 +56,17 @@
   $('form').submit(function (event) {
     event.preventDefault();
     linkActionProvider.forwardSaveRequest();
+    inviteActionProvider.forwardSaveRequest();
   });
 
   // 3. Fired when the provider has finished
   linkActionProvider.then(function (result) {
     data.action = result.data;
+    save(true);
+  });
+
+  inviteActionProvider.then(function (result) {
+    data.inviteAction = result.data;
     save(true);
   });
 
@@ -86,6 +107,7 @@
 
   function renderDataSourceColumn(dataSourceColumn){
     $('#emailColumn').append('<option value="'+dataSourceColumn+'">'+dataSourceColumn+'</option>');
+    $('#otherColumn').append('<option value="'+dataSourceColumn+'">'+dataSourceColumn+'</option>');
   }
 
   $('#dataSource').on('change', function onDataSourceListChange() {
@@ -95,6 +117,7 @@
 
     $(this).parents('.select-proxy-display').find('.select-value-proxy').html(selectedText);
     $('#emailColumn option:gt(0)').remove();
+    $('#otherColumn option:gt(0)').remove();
 
     if ( $(this).val() !== "none" ) {
       $('.registration-options').removeClass('hidden');
@@ -109,7 +132,7 @@
     });
   });
 
-  $('#emailColumn').on('change', function onDataColumnListChange() {
+  $('#emailColumn, #otherColumn').on('change', function onDataColumnListChange() {
     var selectedOption = $(this).find("option:selected"),
         selectedText = selectedOption.text(),
         selectedValue = selectedOption.val();
