@@ -289,9 +289,3 @@ body.device-offline .link-button-primary {
 	background-color: #D4D4D4;
 }
 /* END OFFLINE STATUS */
-@media (min-width: 640px) {
-	.state .input-wrapper {
-		max-width: 70%;
-		margin: 0 auto;
-	}
-}
