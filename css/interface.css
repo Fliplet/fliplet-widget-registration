@@ -226,6 +226,10 @@ label {
     color: #FFF;
 }
 
+.allow-new-invite {
+    margin-top: 30px;
+}
+
 .fl-widget-provider {
     border: 0;
     width: 100%;
