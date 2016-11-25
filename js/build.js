@@ -46,7 +46,7 @@ $('.fl-email-validation').each(function(){
     }).then(function(entries){
       if(entries.length) {
         entries.forEach(function(entry) {
-          if ( entry.data[check_column] == null ) {
+          if ( entry.data[check_column] === null ) {
             success_callback();
             return;
           } else {
