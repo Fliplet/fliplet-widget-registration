@@ -9,8 +9,10 @@
         </div>
         <button class="btn btn-primary verify-identity">Register</button>
         <button class="btn btn-link have-code hidden">I already have a verification code</button>
+        {{#if allowInvite}}
         <hr>
         <button class="btn btn-secondary btn-request-invite">Request invitation</button>
+        {{/if}}
     </div>
 
     <div class="state future" data-state="verify-code">

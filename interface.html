@@ -69,13 +69,25 @@
           </div>
           <div id="link-actions"></div>
 
-          <h2><small>Link to request invitation form</small></h2>
-          <div class="row">
-              <div class="col-xs-12">
-                  <p>Configure the link that takes users to the request invitation form.</p>
+          <div class="form-horizontal allow-new-invite">
+              <div class="form-group">
+                  <label class="col-sm-4 control-label">Do you want to allow users to request to be invited?</label>
+                  <div class="col-sm-8">
+                      <div class="checkbox">
+                          <input type="checkbox" id="allow_invite" name="allow_invite" {{#if allowInvite}}checked{{/if}}>
+                          <label for="allow_invite">
+                              <span class="check"><i class="fa fa-check"></i></span> Yes, please
+                          </label>
+                      </div>
+                  </div>
               </div>
           </div>
-          <div id="request-invitation-link"></div>
+
+          <div class="new-invite-redirect hidden">
+            <h2><small>Link to request invitation form</small></h2>
+            <p>Configure the link that takes users to the request invitation form.</p>
+            <div id="request-invitation-link"></div>
+          </div>
         </div>
     </form>
 </div>

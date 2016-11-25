@@ -147,6 +147,20 @@
     save();
   }, 500));
 
+  $('#allow_invite').on('change', $.debounce(function() {
+
+    if ( $(this).is(':checked') ) {
+    	$('.new-invite-redirect').removeClass('hidden');
+      data.allowInvite = true;
+    } else {
+    	$('.new-invite-redirect').addClass('hidden');
+      data.allowInvite = false;
+    }
+
+    save();
+
+  }, 0));
+
   $('#help_tip').on('click', function() {
     alert("During beta, please use live chat and let us know what you need help with.");
   });
@@ -157,6 +171,10 @@
         $('#' + fieldId).val(data[fieldId]).change();
       }
     });
+
+    if ( data.allowInvite ) {
+      $('#allow_invite').trigger('change');
+    }
   }
 
 })();
