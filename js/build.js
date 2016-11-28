@@ -52,7 +52,7 @@ $('.fl-email-validation').each(function(){
       if(entries.length) {
         entries.forEach(function(entry) {
           if ( entry.data[check_column] === null ) {
-            success_callback();
+            success_callback(entry);
             return;
           } else {
             fail_callback(false);
@@ -167,7 +167,8 @@ $('.fl-email-validation').each(function(){
       // VALID EMAIL
       if (validateEmail(emailAddress)) {
         // CHECK FOR EMAIL ON DATA SOURCE
-        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, function () {
+        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, function (entry) {
+          userDataPV.entry = entry;
           userDataPV.email = emailAddress;
 
           // EMAIL FOUND ON DATA SOURCE
