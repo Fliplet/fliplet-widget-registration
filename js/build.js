@@ -7,11 +7,16 @@ $('.fl-email-validation').each(function(){
 
   var CODE_VALID = 30,
       CODE_LENGTH = 6,
-      APP_NAME = data.appName,
+      APP_NAME,
       APP_VALIDATION_DATA_DIRECTORY_ID = data.dataSource,
       DATA_DIRECTORY_COLUMN = data.emailColumn,
       DATA_DIRECTORY_CHECK_COLUMN = data.otherColumn,
       CONTACT_UNREACHABLE = "We couldn't reach this contact. Try again or change your networking method.";
+
+  // Getting app name
+  Fliplet.Apps.get( Fliplet.Env.get('appId') ).then(function (app) {
+  	APP_NAME = app[0].name;
+  });
 
   function initEmailValidation() {
     Fliplet.Security.Storage.init().then(function(){
