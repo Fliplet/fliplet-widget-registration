@@ -281,6 +281,9 @@ $('.fl-email-validation').each(function(){
             $email_validation.find('.state.present').removeClass('present').addClass('past');
             calculateElHeight($email_validation.find('.state[data-state=confirmation]'));
             $email_validation.find('.state[data-state=confirmation]').removeClass('future').addClass('present');
+
+            // Analytics - Info Event
+            Fliplet.Analytics.info({ email: userDataPV.email, loginDate: (new Date()).toISOString()});
           });
         }
       } else {
