@@ -23,11 +23,6 @@ $('.fl-email-validation').each(function(){
           $email_validation.find('.have-code').removeClass('hidden').addClass('show');
           calculateElHeight($email_validation.find('.state[data-state=auth]'));
         }
-        if(userDataPV.verified && !Fliplet.Env.get('interact')) {
-          if(typeof data.action !== "undefined") {
-            Fliplet.Navigate.to(data.action);
-          }
-        }
       }, function () {
       });
     });
