@@ -357,7 +357,7 @@ $('.fl-email-validation').each(function(){
       email: ""
     };
 
-    window.pvName = "user_data_" + Fliplet.Env.get('appId') + "_" + widgetId;
+    window.pvName = "registration-data-source";
     Fliplet.Security.Storage.create(pvName, structure).then(function(data){
       window.userDataPV = data;
       success_callback();
