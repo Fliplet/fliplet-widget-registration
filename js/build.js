@@ -2,7 +2,7 @@ $('.fl-email-registration').each(function(){
   //customization
 
   var $email_validation = $(this);
-  var widgetId = $email_validation.data('email-verification-id');
+  var widgetId = $email_validation.data('email-registration-id');
   var data = Fliplet.Widget.getData(widgetId) || {};
 
   var CODE_VALID = 30,
