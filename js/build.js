@@ -1,4 +1,4 @@
-$('.fl-email-validation').each(function(){
+$('.fl-email-registration').each(function(){
   //customization
 
   var $email_validation = $(this);
