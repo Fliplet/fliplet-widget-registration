@@ -41,7 +41,7 @@ $('.fl-email-registration').each(function(){
     }).then(function(entries){
       if(entries.length) {
         entries.forEach(function(entry) {
-          if ( entry.data[check_column] === null ) {
+          if ( entry.data[check_column] === null || entry.data[check_column] === "" ) {
             success_callback(entry);
             return;
           } else {
