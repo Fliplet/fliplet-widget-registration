@@ -239,3 +239,30 @@ label {
 #link-actions {
     overflow: hidden;
 }
+
+.regex-options {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.325s ease-out;
+    -o-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    -webkit-transform: translate(0, -10px);
+    -moz-transform: translate(0, -10px);
+    -o-transform: translate(0, -10px);
+    transform: translate(0, -10px);
+}
+
+.regex-options.show {
+    display: block;
+    opacity: 1;
+    overflow: auto;
+    height: auto;
+    margin-bottom: 15px;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}

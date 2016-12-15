@@ -161,6 +161,15 @@
 
   }, 0));
 
+  $('#open-advanced').on('click', function() {
+    if ($('.regex-options').hasClass('show')) {
+      $('.regex-options').removeClass('show');
+    } else {
+      $('.regex-options').addClass('show');
+    }
+
+  });
+
   $('#help_tip').on('click', function() {
     alert("During beta, please use live chat and let us know what you need help with.");
   });
