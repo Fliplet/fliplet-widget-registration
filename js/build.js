@@ -158,6 +158,16 @@ $('.fl-email-registration').each(function(){
       calculateElHeight($('.state[data-state=verify-code]'));
       // VALID EMAIL
       if (validateEmail(emailAddress)) {
+        // Check if it has a valid domains
+        if (data.domains && data.domains.length) {
+          var emailDomain = emailAddress.split('@')[1];
+          if (data.domains.indexOf(emailDomain) === -1) {
+            // Invalid email domain do something
+            alert('Invalid domain');
+            return;
+          }
+        }
+
         // CHECK FOR EMAIL ON DATA SOURCE
         readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, function (entry) {
           userDataPV.entry = entry;

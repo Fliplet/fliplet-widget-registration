@@ -76,6 +76,12 @@
   }
 
   function save(notifyComplete) {
+    data.domains = [];
+    var domains = $('#domains').val().replace(/\s+/g, '');
+    if (domains !== '') {
+      data.domains = domains.split(',');
+    }
+
     // Get and save values to data
     fields.forEach(function (fieldId) {
       data[fieldId] = $('#' + fieldId).val();
@@ -175,6 +181,10 @@
   });
 
   function initialiseData() {
+    if (data.domains) {
+      $('#domains').val(data.domains.join(','));
+      $('.regex-options').addClass('show');
+    }
     fields.forEach(function (fieldId) {
       if(data[fieldId]) {
         $('#' + fieldId).val(data[fieldId]).change();
