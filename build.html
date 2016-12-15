@@ -37,10 +37,12 @@
 </div>
 <template id="email-template-holder">
     <div>
+        <p>Thank you for your interest in the <strong>\{{org_name}} \{{app_name}}</strong></p>
+        <p>You or someone has requested to access the app. To continue using the app, please enter your verification code into the app on your mobile device.</p>
         <p>Your verification code is: <strong>\{{code}}</strong>
-            <br><span style="color:#999;font-size:0.9em;">
-    This verification code will be valid for the next \{{code_duration}} minutes</span></p>
-        <p>You or someone has requested to access the app: <strong>\{{app_name}}</strong>. To continue using the app, please enter your verification code into the app on your mobile device.</p>
+        <br>
+        <span style="color:#999;font-size:0.9em;">This verification code will be valid for the next \{{code_duration}} minutes</span>
+        </p>
         <p>If you did not perform this request, you can ignore this email.</p>
         <p>Generated at: \{{time}}</p>
     </div>

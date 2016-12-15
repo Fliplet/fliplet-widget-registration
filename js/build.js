@@ -7,6 +7,7 @@ $('.fl-email-registration').each(function(){
 
   var CODE_VALID = 1440,
       CODE_LENGTH = 6,
+      ORG_NAME = Fliplet.Env.get('organizationName'),
       APP_NAME = Fliplet.Env.get('appName'),
       APP_VALIDATION_DATA_DIRECTORY_ID = data.dataSource,
       DATA_DIRECTORY_COLUMN = data.emailColumn,
@@ -98,6 +99,7 @@ $('.fl-email-registration').each(function(){
       code: userDataPV.code,
       time: moment().format('MMM Do YY, h:mm:ss a'),
       app_name: APP_NAME,
+      org_name: ORG_NAME,
       code_duration: CODE_VALID
     });
 
