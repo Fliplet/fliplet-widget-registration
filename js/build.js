@@ -5,7 +5,7 @@ $('.fl-email-registration').each(function(){
   var widgetId = $email_validation.data('email-registration-id');
   var data = Fliplet.Widget.getData(widgetId) || {};
 
-  var CODE_VALID = 30,
+  var CODE_VALID = 1440,
       CODE_LENGTH = 6,
       APP_NAME = Fliplet.Env.get('appName'),
       APP_VALIDATION_DATA_DIRECTORY_ID = data.dataSource,
