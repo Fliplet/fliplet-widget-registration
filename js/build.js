@@ -159,7 +159,8 @@ $('.fl-email-registration').each(function(){
       // VALID EMAIL
       if (validateEmail(emailAddress)) {
         // CHECK FOR EMAIL ON DATA SOURCE
-        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, function (entry) {
+
+        function greatSuccess(entry) {
           userDataPV.entry = entry;
           userDataPV.email = emailAddress;
 
@@ -180,17 +181,20 @@ $('.fl-email-registration').each(function(){
           }, function () {
             $email_validation.find('.email-error').text(CONTACT_UNREACHABLE).addClass("show");
           });
+        }
 
-        }, function ( error ) {
+        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, greatSuccess, function ( error ) {
           if ( error ) {
             // Check if it has a valid domains
             if (data.domains && data.domains.length) {
               var emailDomain = emailAddress.split('@')[1];
-              if (data.domains.indexOf(emailDomain) === -1) {
-                // Invalid email domain do something
-                // TODO: Do your stuff here
-                alert('Invalid domain');
-                return;
+              if (data.domains.indexOf(emailDomain) > -1) {
+                return Fliplet.DataSources.connect(APP_VALIDATION_DATA_DIRECTORY_ID).then(function (dataSource) {
+                  var insertData = {};
+                  insertData[DATA_DIRECTORY_COLUMN] = emailAddress;
+                  dataSource.insert(insertData)
+                    .then(greatSuccess);
+                });
               }
             }
 
