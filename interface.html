@@ -6,13 +6,21 @@
             <a id="help_tip" href="#">Need help?</a>
         </header>
 
-        <h2><small>Choose data source</small></h2>
-        <div class="form-group clearfix">
-            <div class="col-sm-4 control-label">
-                <label>Select the data source you want to use for registration</label>
-            </div>
-            <div class="col-sm-8">
-                <label class="select-proxy-display">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active" id="settings-control"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            <li role="presentation" class="" id="email-template-control"><a href="#email-template" aria-controls="email-template" role="tab" data-toggle="tab">Email template</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane tab-pane-content active" id="settings">
+
+                <h2><small>Choose data source</small></h2>
+                <div class="form-group clearfix">
+                    <div class="col-sm-12 control-label">
+                        <label>Select the data source you want to use for registration</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="select-proxy-display">
                     <span class="icon fa fa-chevron-down"></span>
                     <span class="select-value-proxy">&mdash;Select a data source&mdash;</span>
                     <span id="data-source-columns">
@@ -21,17 +29,17 @@
                     </select>
                   </span>
                 </label>
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="registration-options hidden">
-          <div class="form-group clearfix">
-              <div class="col-sm-4 control-label">
-                  <label>Select the email field</label>
-                  <p class="help-block">Users will need to enter their emails and they will be matched agaist the emails on this field.</p>
-              </div>
-              <div class="col-sm-8">
-                  <label class="select-proxy-display">
+                <div class="registration-options hidden">
+                    <div class="form-group clearfix">
+                        <div class="col-sm-12 control-label">
+                            <label>Select the email field</label>
+                            <p class="help-block">Users will need to enter their emails and they will be matched agaist the emails on this field.</p>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="select-proxy-display">
                       <span class="icon fa fa-chevron-down"></span>
                       <span class="select-value-proxy">&mdash;Select a field&mdash;</span>
                       <span id="email-columns">
@@ -40,21 +48,21 @@
                       </select>
                     </span>
                   </label>
-                  <a href="#" id="open-advanced">Advanced options</a>
-                  <div class="regex-options">
-                    <p class="help-block">Allow users to register with an email that match a specific email domain.</p>
-                    <input type="text" name="domains" class="form-control" id="domains" placeholder="example.com, domain.com" value=""/>
-                  </div>
-              </div>
-          </div>
+                            <a href="#" id="open-advanced">Advanced options</a>
+                            <div class="regex-options">
+                                <p class="help-block">Allow users to register with an email that match a specific email domain.</p>
+                                <input type="text" name="domains" class="form-control" id="domains" placeholder="example.com, domain.com" value="" />
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="form-group clearfix">
-              <div class="col-sm-4 control-label">
-                  <label>Select a field that will determine if a user is registered</label>
-                  <p class="help-block">If this field is empty the user will be allowed to continue with the registration.</p>
-              </div>
-              <div class="col-sm-8">
-                  <label class="select-proxy-display">
+                    <div class="form-group clearfix">
+                        <div class="col-sm-12 control-label">
+                            <label>Select a field that will determine if a user is registered</label>
+                            <p class="help-block">If this field is empty the user will be allowed to continue with the registration.</p>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="select-proxy-display">
                       <span class="icon fa fa-chevron-down"></span>
                       <span class="select-value-proxy">&mdash;Select a field&mdash;</span>
                       <span id="other-columns">
@@ -63,40 +71,123 @@
                       </select>
                     </span>
                   </label>
-              </div>
-          </div>
+                        </div>
+                    </div>
 
-          <h2><small>Redirect after verification</small></h2>
-          <div class="row">
-              <div class="col-xs-12">
-                  <p>The user will be redirected after being verified.</p>
-              </div>
-          </div>
-          <div id="link-actions"></div>
+                    <h2><small>Redirect after verification</small></h2>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>The user will be redirected after being verified.</p>
+                        </div>
+                    </div>
+                    <div id="link-actions"></div>
 
-          <div class="allow-new-invite">
-              <div class="form-group">
-                  <label class="col-sm-4 control-label">Do you want to allow users to request to be invited?</label>
-                  <div class="col-sm-8">
-                      <div class="checkbox">
-                          <input type="checkbox" id="allow_invite" name="allow_invite" {{#if allowInvite}}checked{{/if}}>
-                          <label for="allow_invite">
+                    <div class="allow-new-invite">
+                        <div class="form-group">
+                            <label class="col-sm-12 control-label">Do you want to allow users to request to be invited?</label>
+                            <div class="col-sm-12">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="allow_invite" name="allow_invite" {{#if allowInvite}}checked{{/if}}>
+                                    <label for="allow_invite">
                               <span class="check"><i class="fa fa-check"></i></span> Yes, please
                           </label>
-                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-invite-redirect hidden">
+                        <h2><small>Link to request invitation form</small></h2>
+                        <p>Configure the link that takes users to the request invitation form.</p>
+                        <div id="request-invitation-link"></div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane tab-pane-content" id="email-template">
+
+              <h2><small>Configure your verification email template</small></h2>
+
+              <div class="form-group clearfix">
+                  <div class="col-sm-12 control-label">
+                      <label>Template of the email sent to the user with a verification code</label>
+                  </div>
+                  <div class="col-sm-12">
+                      <textarea data-tinymce id="validationEmail" class="form-control"></textarea>
+                  </div>
+                  <div class="col-sm-12">
+                    <h2><small>How to use</small></h2>
+                    <p>Use the following to:</p>
+                    <ul>
+                      <li><code>{{verification_code}}</code> - insert the verification code <strong>(Required)</strong></li>
+                      <li><code>{{app_name}}</code> - insert your app name</li>
+                      <li><code>{{organisation_name}}</code> - insert your organisation name</li>
+                    </ul>
                   </div>
               </div>
-          </div>
 
-          <div class="new-invite-redirect hidden">
-            <h2><small>Link to request invitation form</small></h2>
-            <p>Configure the link that takes users to the request invitation form.</p>
-            <div id="request-invitation-link"></div>
-          </div>
+            </div>
         </div>
     </form>
 </div>
 
 <template id="template-data-source-entry">
     <option value="\{{id}}">\{{name}}</option>
+</template>
+
+<template id="template-email-validation">
+<style>body{background-color:#eee}</style>
+<table border="0" margin="0" cellpadding="15" cellspacing="0" style="border:0;font-family:helvetica,arial,sans-serif;width:100%;background-color:#eee">
+<tbody>
+<tr>
+<td style="text-align:center">
+<!--[if mso]>
+<center>
+<table><tr><td width="600">
+<![endif]-->
+<table align="center" border="0" margin="0" cellpadding="0" cellspacing="0" style="border:0;max-width:600px;text-align:left;background-color:#fff">
+<tbody>
+<tr>
+<td>
+<table border="0" margin="0" cellpadding="0" cellspacing="0" style="border:0">
+<tbody>
+<tr>
+<td style="width:15px;height:15px"></td>
+<td style="width:15px;height:15px"></td>
+<td style="width:15px;height:15px"></td>
+</tr>
+<tr>
+<td style="width:15px;height:15px"></td>
+<td>
+<h1 style="text-align:center;font-weight:normal;line-height:1.4;color:#666;font-size:24px">Verification code for<br><strong style="color:#333">{{app_name}}</strong></h1>
+<h2 style="text-align:center;font-weight:normal;line-height:1.4;color:#666;font-size:24px">Your code is<br><strong style="color:#333">{{verification_code}}</strong></h2>
+<p style="text-align:center;font-size:12px;color:#999">This code is only valid for 24 hours</p>
+<hr style="border-left:none;border-right:0;border-bottom:0;border-top:1px solid #ccc" />
+<p style="color:#333;line-height:1.6;font-size:14px">This email is sent to you from {{organisation_name}}.</p>
+<p style="color:#333;line-height:1.6;font-size:14px"><strong>What is this code for?</strong> To verify you can access the registered email address and protect your account. Please enter the above code into your app.</p>
+<p style="color:#333;line-height:1.6;font-size:14px"><strong> Didn't request this code?</strong> Please ignore it. If you think someone is trying to use your details without permission or are concerned by this email please contact your app administrator.</p>
+<p style="color:#333;line-height:1.6;font-size:14px"><strong> Do you have further questions?</strong> please contact your app administrator.
+<hr style="border-left:none;border-right:0;border-bottom:0;border-top:1px solid #ccc" />
+<p style="color:#999;line-height:1.6;font-size:12px">This email is sent by <a href="https://fliplet.com">Fliplet</a>, an enterprise app platform used by <strong>{{organisation_name}}</strong> to manage their mobile and web apps. To find out more about Fliplet and our terms and conditions please visit <a href="https://fliplet.com">fliplet.com</a>.</p>
+</td>
+<td style="width:15px;height:15px"></td>
+</tr>
+<tr>
+<td style="width:15px;height:15px"></td>
+<td style="width:15px;height:15px"></td>
+<td style="width:15px;height:15px"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--[if mso]>
+</td></tr></table>
+</center>
+<![endif]-->
+</td>
+</tr>
+</tbody>
+</table>
 </template>

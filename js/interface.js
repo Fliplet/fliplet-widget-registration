@@ -10,6 +10,7 @@
   var templates = {
     dataSourceEntry: template('data-source-entry')
   };
+  var emailTemplate = $('#template-email-validation').html();
 
   var fields = [
     'dataSource',
@@ -45,6 +46,22 @@
         Fliplet.Widget.toggleSaveButton(data.isValid === true);
       }
     }
+  });
+
+  // TinyMCE INIT
+  tinymce.init({
+    selector: '#validationEmail',
+    theme: 'modern',
+    plugins: [
+      'advlist lists link image charmap hr',
+      'searchreplace insertdatetime table textcolor colorpicker code'
+    ],
+    toolbar: 'formatselect | fontselect fontsizeselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent | blockquote subscript superscript | table charmap hr | removeformat | code',
+    menubar: false,
+    statusbar: true,
+    inline: false,
+    resize: true,
+    min_height: 300
   });
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
@@ -86,6 +103,8 @@
     fields.forEach(function (fieldId) {
       data[fieldId] = $('#' + fieldId).val();
     });
+
+    data.emailTemplate = tinymce.get('validationEmail').getContent();
 
     Fliplet.Widget.save(data).then(function () {
       if (notifyComplete) {
@@ -181,17 +200,25 @@
   });
 
   function initialiseData() {
-    if (data.domains) {
+
+    if ( "emailTemplate" in data ) {
+      tinymce.get('validationEmail').setContent(data.emailTemplate);
+    } else {
+      tinymce.get('validationEmail').setContent(emailTemplate);
+    }
+
+    if ( "domains" in data ) {
       $('#domains').val(data.domains.join(','));
       $('.regex-options').addClass('show');
     }
+
     fields.forEach(function (fieldId) {
-      if(data[fieldId]) {
+      if( fieldId in data ) {
         $('#' + fieldId).val(data[fieldId]).change();
       }
     });
 
-    if ( data.allowInvite ) {
+    if ( "allowInvite" in data ) {
       $('#allow_invite').trigger('change');
     }
   }

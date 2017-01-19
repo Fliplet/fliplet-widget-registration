@@ -12,6 +12,7 @@ $('.fl-email-registration').each(function(){
       APP_VALIDATION_DATA_DIRECTORY_ID = data.dataSource,
       DATA_DIRECTORY_COLUMN = data.emailColumn,
       DATA_DIRECTORY_CHECK_COLUMN = data.otherColumn,
+      EMAIL_TEMPLATE = data.emailTemplate,
       CONTACT_UNREACHABLE = "We couldn't reach this contact. Try again or change your networking method.";
 
   function initEmailValidation() {
@@ -93,13 +94,13 @@ $('.fl-email-registration').each(function(){
 
   function generateVerifyBody() {
     var body;
-    var string = $("#email-template-holder").html();
+    var string = EMAIL_TEMPLATE;
     var template = Handlebars.compile(string);
     body = template({
-      code: userDataPV.code,
+      verification_code: userDataPV.code,
       time: moment().format('MMM Do YY, h:mm:ss a'),
       app_name: APP_NAME,
-      org_name: ORG_NAME,
+      organisation_name: ORG_NAME,
       code_duration: CODE_VALID
     });
 

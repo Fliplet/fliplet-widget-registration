@@ -15,6 +15,10 @@ body {
     overflow: auto;
 }
 
+.form-horizontal .control-label {
+    text-align: left !important;
+}
+
 .add-link {
     margin-top: 10px;
 }
@@ -265,4 +269,34 @@ label {
     -moz-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
+}
+
+.tab-content {
+    padding: 15px 0 0;
+}
+/* TABS */
+.nav-tabs > li.disabled {
+    pointer-events: none;
+}
+
+.nav-tabs > li.disabled > a {
+    color: #999 !important;
+}
+
+.nav > li > a,
+.nav > li > a:focus,
+.nav > li > a:hover {
+    color: #333 !important;
+    border: 0;
+    border-bottom: 4px solid transparent;
+    background: none;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    color: #333;
+    border: 0;
+    border-bottom: 4px solid #00abd2;
+    background: none;
 }
