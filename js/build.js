@@ -101,7 +101,7 @@ $('.fl-email-registration').each(function(){
       time: moment().format('MMM Do YY, h:mm:ss a'),
       app_name: APP_NAME,
       organisation_name: ORG_NAME,
-      code_duration: CODE_VALID
+      code_duration: (CODE_VALID / 60)
     });
 
     return body;
