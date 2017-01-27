@@ -164,6 +164,8 @@ $('.fl-email-registration').each(function(){
         function greatSuccess(entry) {
           userDataPV.entry = entry;
           userDataPV.email = emailAddress;
+          // Set PV to be used by Chat
+          Fliplet.App.Storage.set('fl-chat-auth-email', emailAddress);
 
           // EMAIL FOUND ON DATA SOURCE
           if ($email_validation.find('.state[data-state=auth] .form-group').hasClass('has-error')) {
