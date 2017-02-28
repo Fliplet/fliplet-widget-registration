@@ -61,7 +61,16 @@
     statusbar: true,
     inline: false,
     resize: true,
-    min_height: 300
+    min_height: 300,
+    setup : function(editor) {
+      editor.on('init', function() {
+        if ("emailTemplate" in data && data.emailTemplate !== "") {
+          tinymce.get('validationEmail').setContent(data.emailTemplate);
+        } else {
+          tinymce.get('validationEmail').setContent(emailTemplate);
+        }
+      });
+    }
   });
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
@@ -200,12 +209,6 @@
   });
 
   function initialiseData() {
-
-    if ( "emailTemplate" in data ) {
-      tinymce.get('validationEmail').setContent(data.emailTemplate);
-    } else {
-      tinymce.get('validationEmail').setContent(emailTemplate);
-    }
 
     if ( "domains" in data ) {
       $('#domains').val(data.domains.join(','));
