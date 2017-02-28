@@ -186,7 +186,10 @@ $('.fl-email-registration').each(function(){
           });
         }
 
-        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, '{"' + DATA_DIRECTORY_COLUMN+'":' + '"' + emailAddress + '"}', DATA_DIRECTORY_CHECK_COLUMN, greatSuccess, function ( error ) {
+        var where = {};
+        where[DATA_DIRECTORY_COLUMN] = emailAddress;
+
+        readDataSource(APP_VALIDATION_DATA_DIRECTORY_ID, where, DATA_DIRECTORY_CHECK_COLUMN, greatSuccess, function ( error ) {
           if ( error ) {
             // Check if it has a valid domains
             if (data.domains && data.domains.length) {
