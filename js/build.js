@@ -36,7 +36,7 @@ $('.fl-email-registration').each(function(){
   function readDataSource(data_source_id, where_object, check_column, success_callback, fail_callback) {
     //read_data_sources -> OK.
 
-    Fliplet.DataSources.connect(data_source_id).then(function(dataSource){
+    Fliplet.DataSources.connect(data_source_id, { offline: false }).then(function(dataSource){
       return dataSource.find({
         where: where_object
       });
