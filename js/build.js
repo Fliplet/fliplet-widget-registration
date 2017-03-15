@@ -162,12 +162,11 @@ $('.fl-email-registration').each(function(){
         // CHECK FOR EMAIL ON DATA SOURCE
 
         function greatSuccess(entry) {
+          userDataPV.entry = entry;
           /* Replicate data structure */
           userDataPV.entry = {};
           userDataPV.entry.data = {};
-          userDataPV.entry.data['Email address'] = emailAddress;
-          
-          userDataPV.entry = entry;
+          userDataPV.entry.data['Email address'] = entry.data['Email address'] || emailAddress;
 
           // Set PV to be used by Chat
           Fliplet.App.Storage.set('fl-chat-auth-email', emailAddress);
@@ -382,7 +381,7 @@ $('.fl-email-registration').each(function(){
       verified: false,
       code: "",
       code_generated_at: "",
-      email: ""
+      entry: {}
     };
 
     window.pvName = "registration-data-source";
