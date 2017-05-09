@@ -42,6 +42,7 @@
   },
   "references": [
     "action.page:page",
-    "inviteAction.page:page"
+    "inviteAction.page:page",
+    "dataSource:dataSource"
   ]
 }
