@@ -32,7 +32,8 @@
       "font-awesome",
       "fliplet-security",
       "fliplet-communicate",
-      "fliplet-datasources"
+      "fliplet-datasources",
+      "moment"
     ],
     "assets": [
       "vendor/moment.js",
