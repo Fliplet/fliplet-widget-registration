@@ -36,7 +36,6 @@
       "moment"
     ],
     "assets": [
-      "vendor/moment.js",
       "js/build.js",
       "css/build.css"
     ]
